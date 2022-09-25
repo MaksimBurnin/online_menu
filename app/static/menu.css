@@ -12,6 +12,10 @@
   padding: 15px;
 }
 
+.dish.added {
+  background: #d9fbd9;
+}
+
 .dish__image {
   flex: 0 1 200px;
 }

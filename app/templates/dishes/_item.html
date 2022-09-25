@@ -1,6 +1,7 @@
 {% load humanize %}
+{% load utils %}
 
-<article class="dish">
+<article class="dish {% if dish.pk in cart.item_pks %}added{% endif %}" data-id="{{dish.pk}}">
   <div class="dish__image">
     <img src="{{ dish.image.url }}">
   </div>
@@ -22,9 +23,9 @@
   </div>
   <div class="dish__controls">
     <div class="">
-      <input type="hidden" name="id">
-      <input class="dish__qty" type="number" min="1" value="1">
+      Quantity: <div class="dish__qty">{{cart.items|dict_value:dish.pk}}</div>
       <input class="dish__add" type="submit" value="Add">
+      <input class="dish__remove" type="submit" value="Remove">
     </div>
   </div>
 </article>

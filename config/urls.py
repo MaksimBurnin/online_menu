@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.MenuView.as_view(), name='root'),
     #path('orders/', views.create_order, name='order:create'),
     path('orders/<int:order_id>', views.order, name='order'),
+    path('cart', views.cart_action)
 ]
 
 if settings.DEBUG:

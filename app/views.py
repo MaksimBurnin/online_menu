@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.db import transaction
 
+from .cart import Cart
 from .models import Category, Order
 from . import forms
 
@@ -10,7 +11,8 @@ class MenuView(View):
     def get(self, request):
         categories = Category.objects.prefetch_related('dishes')
         form = forms.CreateOrderForm()
-        context = {'categories': categories, 'order_form': form}
+        cart = Cart(request.session)
+        context = {'categories': categories, 'order_form': form, 'cart': cart}
         return render(request, 'dishes/index.html', context)
 
     @transaction.atomic
@@ -31,12 +33,18 @@ def order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
     return render(request, 'orders/show.html', {'order': order})
 
-def cart_add(request):
+def cart_action(request):
     if request.method != "POST":
         return HttpResponseBadRequest()
-    JsonResponse({})
 
-def cart_remove(request):
-    if request.method != "POST":
-        return HttpResponseBadRequest()
-    JsonResponse({})
+    cart = Cart(request.session)
+    action = request.POST['action']
+    pk = request.POST['id']
+
+    if action == 'add':
+        cart.add(pk)
+
+    if action == 'remove':
+        cart.remove(pk)
+
+    return JsonResponse(cart.items)
