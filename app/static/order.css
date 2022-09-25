@@ -1,0 +1,18 @@
+.order__data{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.order__data th{
+  text-align: left;
+}
+.order__data .number{
+  text-align: right;
+}
+
+.order__data th,
+.order__data td {
+  border: 1px solid #afafaf;
+  padding: 3px 10px;
+}

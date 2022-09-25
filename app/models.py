@@ -49,6 +49,17 @@ class Order(models.Model):
             )
             item.save()
 
+    @property
+    def allergens(self):
+        items = [item for item in self.order_items.all() if item.dish]
+
+        allergens = []
+        for item in items:
+            for allergen in item.dish.allergens.all():
+                allergens.append(allergen)
+
+        return list(set(allergens))
+
     def save(self, *args, **kwargs):
         self.total = 0
 
@@ -61,9 +72,6 @@ class Order(models.Model):
           self.total += item.price * item.qty
 
         super().save(*args, **kwargs)
-
-
-
 
 class OrderItem(models.Model):
     # Basic information of products is dupliated to preserve it for

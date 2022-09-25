@@ -19,7 +19,7 @@ class MenuView(View):
     def post(self, request):
         form = forms.CreateOrderForm(request.POST)
         if form.is_valid():
-            form.save
+            form.save()
             order = form.instance
             order.fill_from_cart(request.session)
             form.save()
