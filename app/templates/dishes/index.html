@@ -1,18 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
-<div class="menu__category">
-  <h1>Breakfast</h1>
-  <div class="menu__dishes">
-    {% include "dishes/_item.html" %}
-    {% include "dishes/_item.html" %}
-    {% include "dishes/_item.html" %}
-    {% include "dishes/_item.html" %}
-    {% include "dishes/_item.html" %}
-
+{% for category in categories %}
+  <div class="menu__category">
+    <h1>{{category.name}}</h1>
+    <div class="menu__dishes">
+      {% for dish in category.dishes.all %}
+        {% include "dishes/_item.html" %}
+      {% endfor %}
+    </div>
   </div>
-</div>
+{% endfor %}
+
 <div class="order_form">
   <h1>Place your order</h1>
 

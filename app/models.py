@@ -20,8 +20,8 @@ class Allergen(models.Model):
 
 class Dish(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    aellergens = models.ManyToManyField(Allergen)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='dishes')
+    allergens = models.ManyToManyField(Allergen)
     energy_value = models.IntegerField()
     price = models.IntegerField(validators=[MinValueValidator(1, "Price should be positive")])
     image = models.ImageField(upload_to ='uploads/')

@@ -3,14 +3,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.db import transaction
 
-from . import models
+from .models import Category, Order
 from . import forms
 
 class MenuView(View):
     def get(self, request):
-        dishes = None
+        categories = Category.objects.prefetch_related('dishes')
         form = forms.CreateOrderForm()
-        context = {'dishes': dishes, 'order_form': form}
+        context = {'categories': categories, 'order_form': form}
         return render(request, 'dishes/index.html', context)
 
     @transaction.atomic
@@ -28,7 +28,7 @@ class MenuView(View):
 
 
 def order(request, order_id):
-    order = get_object_or_404(models.Order, pk=order_id)
+    order = get_object_or_404(Order, pk=order_id)
     return render(request, 'orders/show.html', {'order': order})
 
 def cart_add(request):

@@ -1,19 +1,24 @@
+{% load humanize %}
+
 <article class="dish">
   <div class="dish__image">
     <img src="https://baconmockup.com/640/360">
   </div>
   <div class="dish__content">
     <div class="">
-      <h2 class="dish__name">Mixed omlette</h2>
-      <div class="dish__price">$11.5</div>
+      <h2 class="dish__name">{{dish.name}}</h2>
+      <div class="dish__price">{{dish.price|intcomma}}</div>
     </div>
-    <div class="dish__allergens">
-      Allergens:
-      <ul>
-        <li>peanuts</li>
-        <li>something</li>
-      </ul>
-    </div>
+    {% if dish.allergens.all %}
+      <div class="dish__allergens">
+        Allergens:
+        <ul>
+          {% for allergen in dish.allergens.all %}
+            <li>{{allergen}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
   <div class="dish__controls">
     <div class="">
