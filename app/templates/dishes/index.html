@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="menu__category">
+  <h1>Breakfast</h1>
+  <div class="menu__dishes">
+    {% include "dishes/_item.html" %}
+    {% include "dishes/_item.html" %}
+    {% include "dishes/_item.html" %}
+    {% include "dishes/_item.html" %}
+    {% include "dishes/_item.html" %}
+
+  </div>
+</div>
+<div class="order_form">
+  <h1>Place your order</h1>
+
+  <form action="{% url 'root' %}" method="post">
+    {% csrf_token %}
+    {{ order_form.as_ul }}
+    <input type="submit" value="Place!">
+  </form>
+</div>
+
+{% endblock %}

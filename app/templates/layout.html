@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'layout/_head.html' %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-header__logo">
+        <a href="{% url 'root' %}">
+          Online Menu
+        </a>
+      </h1>
+    </div>
+  </header>
+  <main class="site-content container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer container">
+    <div class="copyright">
+      © 2022 Created by Maksim Burnin for Alemira
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+.menu__dishes{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
+.dish {
+  background: #e6e6e6;
+  flex: 0 0 auto;
+  display: flex;
+  padding: 15px;
+}
+
+.dish__image {
+  flex: 0 1 200px;
+}
+.dish__image img{
+  width: 100%;
+}
+.dish__content {
+  flex: 1 0 auto;
+  padding: 0 15px;
+}
+.dish__controls{
+  flex: 0 1 50px;
+}
+
+.dish__name {
+  margin: 0;
+  font-size: 18px;
+}
+
+.dish__qty,
+.dish__add{
+  width: 100%;
+}
+
+.dish__allergens {
+  font-style: italic;
+}
+.dish__allergens ul{
+  margin: 0;
+  padding: 0;
+  display: inline;
+  list-style: none;
+}
+.dish__allergens li{
+  display: inline;
+}
+.dish__allergens li::before{
+  content: '🞄 ';
+  padding: 0 3px
+}
+.dish__allergens li:first-child::before{
+  display: none;
+}
