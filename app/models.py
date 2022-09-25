@@ -24,7 +24,7 @@ class Dish(models.Model):
     allergens = models.ManyToManyField(Allergen)
     energy_value = models.IntegerField()
     price = models.IntegerField(validators=[MinValueValidator(1, "Price should be positive")])
-    image = models.ImageField(upload_to ='uploads/')
+    image = models.ImageField()
     def __str__(self):
         return self.name
 
