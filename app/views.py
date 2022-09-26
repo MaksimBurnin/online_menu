@@ -2,9 +2,11 @@ from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.db import transaction
+from rest_framework import viewsets, parsers
 
 from .cart import Cart
-from .models import Category, Order
+from .models import Category, Order, Dish
+from .serializers import DishSerializer
 from . import forms
 
 class MenuView(View):
@@ -48,3 +50,13 @@ def cart_action(request):
         cart.remove(pk)
 
     return JsonResponse(cart.items)
+
+
+class ApiDishViewSet(viewsets.ModelViewSet):
+    """
+    Use [GET] to retrive a list of Dishes, availible in Online Menu,
+    or [POST] to create a new one
+    """
+    queryset = Dish.objects.all()
+    serializer_class = DishSerializer
+    parser_classes = [parsers.MultiPartParser, parsers.FormParser]
