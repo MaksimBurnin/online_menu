@@ -6,12 +6,18 @@
     <img src="{{ dish.image.url }}">
   </div>
   <div class="dish__content">
-    <div class="">
-      <h2 class="dish__name">{{dish.name}}</h2>
-      <div class="dish__price">{{dish.price|intcomma}}</div>
+    <h2 class="dish__name">{{dish.name}}</h2>
+
+    <div class="dish__property">
+      Price: {{dish.price}}
     </div>
+
+    <div class="dish__property">
+      Energy value: {{dish.energy_value}}
+    </div>
+
     {% if dish.allergens.all %}
-      <div class="dish__allergens">
+      <div class="dish__property dish__allergens">
         Allergens:
         <ul>
           {% for allergen in dish.allergens.all %}
@@ -22,10 +28,10 @@
     {% endif %}
   </div>
   <div class="dish__controls">
-    <div class="">
-      Quantity: <div class="dish__qty">{{cart.items|dict_value:dish.pk}}</div>
-      <input class="dish__add" type="submit" value="Add">
-      <input class="dish__remove" type="submit" value="Remove">
+    <input class="dish__add" type="submit" value="Add">
+    <input class="dish__remove" type="submit" value="Remove">
+    <div class="dish__qty-container">
+      QTY: <span class="dish__qty">{{cart.items|dict_value:dish.pk}}</span>
     </div>
   </div>
 </article>

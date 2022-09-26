@@ -16,6 +16,27 @@
   background: #d9fbd9;
 }
 
+.dish__qty-container {
+  display: none;
+}
+
+.dish__remove {
+  visibility: hidden;
+}
+
+.dish.added .dish__remove {
+  visibility: visible;
+}
+
+.dish.added .dish__qty-container {
+  display: block;
+}
+
+.dish__add,
+.dish__remove {
+  width: 100%;
+  margin-bottom: 5px;
+}
 .dish__image {
   flex: 0 1 200px;
 }
