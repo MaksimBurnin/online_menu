@@ -10,16 +10,22 @@ from .serializers import DishSerializer
 from . import forms
 
 class MenuView(View):
-    def get(self, request):
+    def load_data(self):
         categories = Category.objects.prefetch_related('dishes')
-        form = forms.CreateOrderForm()
-        cart = Cart(request.session)
-        context = {'categories': categories, 'order_form': form, 'cart': cart}
+        cart = Cart(self.request.session)
+        form = forms.CreateOrderForm(self.request.POST)
+        return {'categories': categories, 'order_form': form, 'cart': cart}
+
+    def get(self, request):
+        context = self.load_data()
+        context['order_form'] = forms.CreateOrderForm()
         return render(request, 'dishes/index.html', context)
 
     @transaction.atomic
     def post(self, request):
-        form = forms.CreateOrderForm(request.POST)
+        context = self.load_data()
+        form = context['order_form']
+
         if form.is_valid():
             form.save()
             order = form.instance
